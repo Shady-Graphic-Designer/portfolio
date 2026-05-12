@@ -319,7 +319,9 @@
     .lazord-img,.teacher-img,.ai-img,.El_3bd-img,.Certificates-of-Appreciation-img,.Cosmetics-img,.Creative-Icons-img,.party-img,.Thumbnails-for-Teachers-img,.YLY-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top; z-index:2; transition:transform .5s var(--expo); }
     .Cosmetics-img,.Creative-Icons-img { object-position:center; }
     .wcard:hover .lazord-img,.wcard:hover .teacher-img,.wcard:hover .ai-img,.wcard:hover .El_3bd-img,.wcard:hover .Certificates-of-Appreciation-img,.wcard:hover .Cosmetics-img,.wcard:hover .Creative-Icons-img,.wcard:hover .party-img,.wcard:hover .Thumbnails-for-Teachers-img,.wcard:hover .YLY-img { transform:scale(1.06); }
-
+    .about-ol-1{display: grid ; grid-template-columns: repeat(2,1fr);}
+    .about-ol-2{display: grid ; grid-template-columns: repeat(3,1fr);}
+    .about-ol-3{display: grid ; grid-template-columns: repeat(3,1fr);}
     /* ─── EXPERIENCE — FIXED LTR ──────────────────────────────── */
     #experience { padding:100px 5%; }
     .exp-header { margin-bottom:56px; }
@@ -329,11 +331,11 @@
     /* Timeline — LTR: vertical line on the LEFT */
     .timeline {
       position:relative;
-      padding-left:36px;
+      padding-right:36px;
     }
     .timeline::before {
       content:''; position:absolute;
-      left:0; top:0; bottom:0; width:1px;
+      right:0; top:0; bottom:0; width:1px;
       background:linear-gradient(to bottom,var(--violet),var(--border-hi),transparent);
     }
 
@@ -347,7 +349,7 @@
 
     .timeline-item::before {
       content:''; position:absolute;
-      left:-40px; top:8px;
+      right:-40px; top:8px;
       width:9px; height:9px; border-radius:50%;
       background:var(--bg); border:2px solid var(--violet);
       box-shadow:0 0 10px var(--violet-glow);
@@ -423,7 +425,7 @@
     @keyframes dec-c { 0%,100%{content:'CODE';color:var(--violet);text-shadow:0 0 8px var(--violet-glow)} 30%{content:'&#$%';color:var(--ink-3)} 60%{content:'0000';color:#fff} 90%{content:'C_D_';color:var(--violet)} }
     .f-cursor { animation:f-blink .6s infinite; }
     @keyframes f-blink { 50%{opacity:0} }
-
+    .my-logo-a{ text-decoration: none; }
     /* ─── ANIMATIONS ──────────────────────────────────────────── */
     @keyframes slideUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:none} }
     @keyframes fadeIn  { from{opacity:0} to{opacity:1} }
@@ -448,10 +450,10 @@
       .about-card:hover { transform:none; }
       #experience,#work,#contact { padding:72px 5%; }
       .section-head { margin-bottom:40px; }
-      .timeline { padding-left:24px; }
+      .timeline { padding-right:24px; }
       .timeline-item { grid-template-columns:1fr; gap:4px; }
       .tl-date { padding-top:0; margin-bottom:8px; order:-1; }
-      .timeline-item::before { left:-28px; }
+      .timeline-item::before { right:-28px; }
       .section-head { flex-direction:column; align-items:flex-start; gap:12px; }
     }
     @media(max-width:640px) {
@@ -468,9 +470,9 @@
       .work-stagger-grid { grid-template-columns:1fr; gap:16px; }
       .wcard:nth-child(n) { margin-top:0 !important; }
       .project-body { padding:14px 14px 16px; }
-      .timeline { padding-left:18px; }
+      .timeline { padding-right:18px; }
       .timeline-item { margin-bottom:36px; }
-      .timeline-item::before { left:-22px; width:8px; height:8px; }
+      .timeline-item::before { right:-22px; width:8px; height:8px; }
       .tl-role { font-size:1.1rem; }
       .contact-actions { flex-direction:column; align-items:stretch; gap:12px; }
       .btn-violet-lg,.btn-ghost-dk { justify-content:center; }
@@ -480,10 +482,18 @@
       .hero h1 { font-size:2.2rem; }
       .hero-stats { gap:16px; }
       .stat-num { font-size:1.7rem; }
+       .about-ol-1{display: grid ; grid-template-columns: repeat(1,1fr);}
+    .about-ol-2{display: grid ; grid-template-columns: repeat(1,1fr);}
+    .about-ol-3{display: grid ; grid-template-columns: repeat(1,1fr);}
+
     }
     @media(max-width:768px) {
       .footer-container { flex-direction:column; gap:15px; }
       .item-left,.item-center,.item-right { text-align:center; }
+      .about-ol-1{display: grid ; grid-template-columns: repeat(1,1fr);}
+    .about-ol-2{display: grid ; grid-template-columns: repeat(2,1fr);}
+    .about-ol-3{display: grid ; grid-template-columns: repeat(1,1fr);}
+
     }
   </style>
 </head>
@@ -501,7 +511,7 @@
 
   <!-- NAV -->
   <nav>
-    <a href="#" class="nav-logo"><img src="./photo/Picsart_26-04-14_01-50-14-645.png" alt="Shady Art Logo" class="logo-img"></a>
+    <a href="https://www.facebook.com/jst.shadi" target="_blank" class="nav-logo"><img src="./photo/Picsart_26-04-14_01-50-14-645.png" alt="Shady Art Logo" class="logo-img"></a>
     <ul class="nav-links">
       <li><a href="#about">about</a></li>
       <li><a href="#work">work</a></li>
@@ -521,11 +531,11 @@
       <p class="hero-desc">A professional graphic designer specialising in visual identity and creative design. I transform ideas into exceptional visuals — from logos and print materials to motion graphics and digital content.</p>
       <div class="hero-actions">
         <a href="#work" class="btn-violet">View My Work <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a target="_blank" href="https://wa.me/qr/Y2WFHE2X6OTVE1" class="btn-ghost">Let's Talk <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a target="_blank" href="#contact" class="btn-ghost">Let's Talk <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
       <div class="hero-stats">
         <div>
-          <div class="stat-num">4<span>+</span></div>
+          <div class="stat-num">3<span>+</span></div>
           <div class="stat-label">Years Experience</div>
         </div>
         <div>
@@ -628,30 +638,30 @@
       <div class="about-card reveal">
         <div class="about-card-num">01</div>
         <h4>Education</h4>
-        <ol>
-          <li>Bachelor of Commerce — English Major<br>Kafrelsheikh University | 2023–2027</li>
-          <li>Diploma in Multimedia Arts<br>Grand Notion | 2020–2023</li>
+        <ol class="about-ol-1">
+          <li class="about-li">Bachelor of Commerce — English Major<br>Kafrelsheikh University | 2023–2027</li>
+          <li class="about-li">Diploma in Multimedia Arts<br>Grand Notion | 2020–2023</li>
         </ol>
       </div>
       <div class="about-card reveal">
         <div class="about-card-num">02</div>
         <h4>Skills</h4>
-        <ol>
-          <li>Graphic Design</li>
-          <li>Illustration</li>
-          <li>Photography</li>
-          <li>Motion Graphics</li>
-          <li>Video Production</li>
-          <li>Visual Planning</li>
+        <ol class="about-ol-2">
+          <li class="about-li">Graphic Design</li>
+          <li class="about-li">Illustration</li>
+          <li class="about-li">Photography</li>
+          <li class="about-li">Motion Graphics</li>
+          <li class="about-li">Video Production</li>
+          <li class="about-li">Visual Planning</li>
         </ol>
       </div>
       <div class="about-card reveal">
         <div class="about-card-num">03</div>
         <h4>Languages</h4>
-        <ul>
-          <li>Arabic — Native</li>
-          <li>English — Professional</li>
-          <li>French — Beginner</li>
+        <ul class="about-ol-3">
+          <li class="about-li">Arabic — Native</li>
+          <li class="about-li">English — Professional</li>
+          <li class="about-li">French — Beginner</li>
         </ul>
       </div>
     </div>
@@ -665,40 +675,220 @@
     </div>
     <div class="work-stagger-grid">
       <a class="wcard" href="./sites/gallery-Thumbnails-for-Teachers.html" data-dir="left" data-delay="0">
-        <div class="project-visual"><div class="project-mock mock-poster"><img src="./sites/photo-Thumbnails-for-Teachers/20.jpg" alt="" class="teacher-img"><div class="mock-poster-circle"></div><div class="mock-poster-lines"><div class="mock-poster-line accent"></div><div class="mock-poster-line short"></div><div class="mock-poster-line" style="width:80%"></div><div class="mock-poster-line short"></div></div></div><div class="project-tag">Visual Identity</div></div>
-        <div class="project-body"><div class="project-stack"><span class="stack-tag">Illustrator</span><span class="stack-tag">InDesign</span><span class="stack-tag">Photoshop</span></div><h3>Thumbnails for Teachers</h3><p>Educational thumbnail design for content interfaces — enhancing clarity and making every lesson visually engaging.</p><div class="project-link">View Case Study <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M12 2H2v10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div></div>
+        <div class="project-visual">
+          <div class="project-mock mock-poster"><img src="./sites/photo-Thumbnails-for-Teachers/20.jpg" alt=""
+              class="teacher-img">
+            <div class="mock-poster-circle"></div>
+            <div class="mock-poster-lines">
+              <div class="mock-poster-line accent"></div>
+              <div class="mock-poster-line short"></div>
+              <div class="mock-poster-line" style="width:80%"></div>
+              <div class="mock-poster-line short"></div>
+            </div>
+          </div>
+          <div class="project-tag">Visual Identity</div>
+        </div>
+        <div class="project-body">
+          <div class="project-stack"><span class="stack-tag">Illustrator</span><span
+              class="stack-tag">InDesign</span><span class="stack-tag">Photoshop</span></div>
+          <h3>Thumbnails for Teachers</h3>
+          <p>Educational thumbnail design for content interfaces — enhancing clarity and making every lesson visually
+            engaging.</p>
+          <div class="project-link">View Case Study <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M12 2H2v10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            </svg></div>
+        </div>
       </a>
       <a class="wcard" href="./sites/gallery - ai.html" data-dir="up" data-delay="120">
-        <div class="project-visual"><div class="project-mock mock-brand"><img src="./sites/photo-ai/10.jpg" alt="" class="ai-img"><div class="mock-brand-logo"></div><div class="mock-brand-colors"><div class="mock-swatch" style="background:#b96eff"></div><div class="mock-swatch" style="background:#7c5cfc"></div><div class="mock-swatch" style="background:#ece7f8"></div><div class="mock-swatch" style="background:#09080e"></div></div></div><div class="project-tag">Logo Design</div></div>
-        <div class="project-body"><div class="project-stack"><span class="stack-tag">Illustrator</span><span class="stack-tag">Figma</span></div><h3>AI Generative Art</h3><p>Exploring new frontiers by fusing human imagination with AI — producing complex, one-of-a-kind visuals beyond traditional tools.</p><div class="project-link">View Project <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M12 2H2v10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div></div>
+        <div class="project-visual">
+          <div class="project-mock mock-brand"><img src="./sites/photo-ai/10.jpg" alt="" class="ai-img">
+            <div class="mock-brand-logo"></div>
+            <div class="mock-brand-colors">
+              <div class="mock-swatch" style="background:#b96eff"></div>
+              <div class="mock-swatch" style="background:#7c5cfc"></div>
+              <div class="mock-swatch" style="background:#ece7f8"></div>
+              <div class="mock-swatch" style="background:#09080e"></div>
+            </div>
+          </div>
+          <div class="project-tag">Logo Design</div>
+        </div>
+        <div class="project-body">
+          <div class="project-stack"><span class="stack-tag">Illustrator</span><span class="stack-tag">Figma</span></div>
+          <h3>AI Generative Art</h3>
+          <p>Exploring new frontiers by fusing human imagination with AI — producing complex, one-of-a-kind visuals beyond
+            traditional tools.</p>
+          <div class="project-link">View Project <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M12 2H2v10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            </svg></div>
+        </div>
       </a>
       <a class="wcard" href="./sites/gallery - El_3bd.html" data-dir="right" data-delay="240">
-        <div class="project-visual"><div class="project-mock mock-editorial"><img src="./photo/40.jpeg" alt="" class="El_3bd-img"><div class="mock-editorial-left"></div><div class="mock-editorial-right"><div class="mock-editorial-line h"></div><div class="mock-editorial-line"></div><div class="mock-editorial-line"></div><div class="mock-editorial-line s"></div><div class="mock-editorial-line"></div><div class="mock-editorial-line s"></div></div></div><div class="project-tag">Editorial</div></div>
-        <div class="project-body"><div class="project-stack"><span class="stack-tag">InDesign</span><span class="stack-tag">Illustrator</span></div><h3>Canvas Quarterly — Independent Arts Magazine</h3><p>Three issues of an arts magazine — typographic grid systems, editorial hierarchies, and exclusive illustrations across 80 pages each.</p><div class="project-link">View Magazine <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M12 2H2v10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div></div>
+        <div class="project-visual">
+          <div class="project-mock mock-editorial"><img src="./photo/40.jpeg" alt="" class="El_3bd-img">
+            <div class="mock-editorial-left"></div>
+            <div class="mock-editorial-right">
+              <div class="mock-editorial-line h"></div>
+              <div class="mock-editorial-line"></div>
+              <div class="mock-editorial-line"></div>
+              <div class="mock-editorial-line s"></div>
+              <div class="mock-editorial-line"></div>
+              <div class="mock-editorial-line s"></div>
+            </div>
+          </div>
+          <div class="project-tag">Editorial</div>
+        </div>
+        <div class="project-body">
+          <div class="project-stack"><span class="stack-tag">InDesign</span><span class="stack-tag">Illustrator</span>
+          </div>
+          <h3>Canvas Quarterly — Independent Arts Magazine</h3>
+          <p>Three issues of an arts magazine — typographic grid systems, editorial hierarchies, and exclusive
+            illustrations across 80 pages each.</p>
+          <div class="project-link">View Magazine <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M12 2H2v10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            </svg></div>
+        </div>
       </a>
       <a class="wcard" href="./sites/gallery-lazord.html" data-dir="left" data-delay="180">
-        <div class="project-visual"><div class="project-mock mock-brand"><img src="./sites/photo-lazord/10.jpeg" class="lazord-img" alt=""><div class="mock-brand-logo"></div><div class="mock-brand-colors"><div class="mock-swatch" style="background:#ff6e6e"></div><div class="mock-swatch" style="background:#ffc96e"></div><div class="mock-swatch" style="background:#ece7f8"></div><div class="mock-swatch" style="background:#09080e"></div></div></div><div class="project-tag">Packaging</div></div>
-        <div class="project-body"><div class="project-stack"><span class="stack-tag">Illustrator</span><span class="stack-tag">Photoshop</span></div><h3>lazord — Beauty Brand Identity</h3><p>Premium visual identity for a luxury cosmetics brand — packaging that merges contemporary elegance with emotional depth.</p><div class="project-link">View Project <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M12 2H2v10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div></div>
+        <div class="project-visual">
+          <div class="project-mock mock-brand"><img src="./sites/photo-lazord/10.jpeg" class="lazord-img" alt="">
+            <div class="mock-brand-logo"></div>
+            <div class="mock-brand-colors">
+              <div class="mock-swatch" style="background:#ff6e6e"></div>
+              <div class="mock-swatch" style="background:#ffc96e"></div>
+              <div class="mock-swatch" style="background:#ece7f8"></div>
+              <div class="mock-swatch" style="background:#09080e"></div>
+            </div>
+          </div>
+          <div class="project-tag">Packaging</div>
+        </div>
+        <div class="project-body">
+          <div class="project-stack"><span class="stack-tag">Illustrator</span><span class="stack-tag">Photoshop</span>
+          </div>
+          <h3>lazord — Beauty Brand Identity</h3>
+          <p>Premium visual identity for a luxury cosmetics brand — packaging that merges contemporary elegance with
+            emotional depth.</p>
+          <div class="project-link">View Project <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M12 2H2v10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            </svg></div>
+        </div>
       </a>
       <a class="wcard" href="./sites/gallery-Creative-Icons.html" data-dir="up" data-delay="300">
-        <div class="project-visual"><div class="project-mock mock-motion"><img src="./sites/photo-Creative-Icons/90.jpg" class="Creative-Icons-img" alt=""><div class="mock-motion-ring"></div><div class="mock-motion-lines"><div class="mock-motion-line glow"></div><div class="mock-motion-line"></div><div class="mock-motion-line" style="width:55%"></div></div></div><div class="project-tag">Motion Graphics</div></div>
-        <div class="project-body"><div class="project-stack"><span class="stack-tag">After Effects</span><span class="stack-tag">Illustrator</span></div><h3>Creative Icons — Animated Brand Icons</h3><p>Motion graphics for brand icons — transforming visual identity into a pulsing, interactive visual language.</p><div class="project-link">View Project <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M12 2H2v10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div></div>
+        <div class="project-visual">
+          <div class="project-mock mock-motion"><img src="./sites/photo-Creative-Icons/90.jpg" class="Creative-Icons-img"
+              alt="">
+            <div class="mock-motion-ring"></div>
+            <div class="mock-motion-lines">
+              <div class="mock-motion-line glow"></div>
+              <div class="mock-motion-line"></div>
+              <div class="mock-motion-line" style="width:55%"></div>
+            </div>
+          </div>
+          <div class="project-tag">Motion Graphics</div>
+        </div>
+        <div class="project-body">
+          <div class="project-stack"><span class="stack-tag">After Effects</span><span
+              class="stack-tag">Illustrator</span></div>
+          <h3>Creative Icons — Animated Brand Icons</h3>
+          <p>Motion graphics for brand icons — transforming visual identity into a pulsing, interactive visual language.
+          </p>
+          <div class="project-link">View Project <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M12 2H2v10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            </svg></div>
+        </div>
       </a>
       <a class="wcard" href="./sites/gallery-Certificates-of-Appreciation.html" data-dir="right" data-delay="420">
-        <div class="project-visual"><div class="project-mock mock-editorial"><img src="./sites/Certificates-of-Appreciation/120.jpg" class="Certificates-of-Appreciation-img" alt=""><div class="mock-editorial-left" style="background:var(--indigo)"></div><div class="mock-editorial-right"><div class="mock-editorial-line h"></div><div class="mock-editorial-line"></div><div class="mock-editorial-line s"></div><div class="mock-editorial-line"></div></div></div><div class="project-tag">Certificates</div></div>
-        <div class="project-body"><div class="project-stack"><span class="stack-tag">Photoshop</span><span class="stack-tag">InDesign</span></div><h3>Certificates of Appreciation</h3><p>Complete visual identity for premium appreciation certificates — reflecting professionalism in every printed and digital detail.</p><div class="project-link">View Campaign <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M12 2H2v10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div></div>
+        <div class="project-visual">
+          <div class="project-mock mock-editorial"><img src="./sites/Certificates-of-Appreciation/120.jpg"
+              class="Certificates-of-Appreciation-img" alt="">
+            <div class="mock-editorial-left" style="background:var(--indigo)"></div>
+            <div class="mock-editorial-right">
+              <div class="mock-editorial-line h"></div>
+              <div class="mock-editorial-line"></div>
+              <div class="mock-editorial-line s"></div>
+              <div class="mock-editorial-line"></div>
+            </div>
+          </div>
+          <div class="project-tag">Certificates</div>
+        </div>
+        <div class="project-body">
+          <div class="project-stack"><span class="stack-tag">Photoshop</span><span class="stack-tag">InDesign</span></div>
+          <h3>Certificates of Appreciation</h3>
+          <p>Complete visual identity for premium appreciation certificates — reflecting professionalism in every printed
+            and digital detail.</p>
+          <div class="project-link">View Campaign <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M12 2H2v10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            </svg></div>
+        </div>
       </a>
       <a class="wcard" href="./sites/gallery-YLY.html" data-dir="left" data-delay="180">
-        <div class="project-visual"><div class="project-mock mock-brand"><img src="./sites/YLY/60.jpg" class="YLY-img" alt=""><div class="mock-brand-logo"></div><div class="mock-brand-colors"><div class="mock-swatch" style="background:#ff6e6e"></div><div class="mock-swatch" style="background:#ffc96e"></div><div class="mock-swatch" style="background:#ece7f8"></div><div class="mock-swatch" style="background:#09080e"></div></div></div><div class="project-tag">Packaging</div></div>
-        <div class="project-body"><div class="project-stack"><span class="stack-tag">Illustrator</span><span class="stack-tag">Photoshop</span></div><h3>YLY — Vibrant Brand Identity</h3><p>Brand identity and packaging for YLY — combining colour and symbolism to give the product a powerful market presence.</p><div class="project-link">View Project <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M12 2H2v10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div></div>
+        <div class="project-visual">
+          <div class="project-mock mock-brand"><img src="./sites/YLY/60.jpg" class="YLY-img" alt="">
+            <div class="mock-brand-logo"></div>
+            <div class="mock-brand-colors">
+              <div class="mock-swatch" style="background:#ff6e6e"></div>
+              <div class="mock-swatch" style="background:#ffc96e"></div>
+              <div class="mock-swatch" style="background:#ece7f8"></div>
+              <div class="mock-swatch" style="background:#09080e"></div>
+            </div>
+          </div>
+          <div class="project-tag">Packaging</div>
+        </div>
+        <div class="project-body">
+          <div class="project-stack"><span class="stack-tag">Illustrator</span><span class="stack-tag">Photoshop</span>
+          </div>
+          <h3>YLY — Vibrant Brand Identity</h3>
+          <p>Brand identity and packaging for YLY — combining colour and symbolism to give the product a powerful market
+            presence.</p>
+          <div class="project-link">View Project <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M12 2H2v10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            </svg></div>
+        </div>
       </a>
       <a class="wcard" href="./sites/gallery-Cosmetics.html" data-dir="up" data-delay="300">
-        <div class="project-visual"><div class="project-mock mock-motion"><img src="./sites/Cosmetics/10.jpg" class="Cosmetics-img" alt=""><div class="mock-motion-ring"></div><div class="mock-motion-lines"><div class="mock-motion-line glow"></div><div class="mock-motion-line"></div><div class="mock-motion-line" style="width:55%"></div></div></div><div class="project-tag">Motion Graphics</div></div>
-        <div class="project-body"><div class="project-stack"><span class="stack-tag">After Effects</span><span class="stack-tag">Illustrator</span></div><h3>Cosmetics — Motion for Beauty</h3><p>Animated showcase for cosmetics — elevating the visual experience and highlighting product beauty in every frame.</p><div class="project-link">View Project <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M12 2H2v10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div></div>
+        <div class="project-visual">
+          <div class="project-mock mock-motion"><img src="./sites/Cosmetics/10.jpg" class="Cosmetics-img" alt="">
+            <div class="mock-motion-ring"></div>
+            <div class="mock-motion-lines">
+              <div class="mock-motion-line glow"></div>
+              <div class="mock-motion-line"></div>
+              <div class="mock-motion-line" style="width:55%"></div>
+            </div>
+          </div>
+          <div class="project-tag">Motion Graphics</div>
+        </div>
+        <div class="project-body">
+          <div class="project-stack"><span class="stack-tag">After Effects</span><span
+              class="stack-tag">Illustrator</span></div>
+          <h3>Cosmetics — Motion for Beauty</h3>
+          <p>Animated showcase for cosmetics — elevating the visual experience and highlighting product beauty in every
+            frame.</p>
+          <div class="project-link">View Project <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M12 2H2v10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            </svg></div>
+        </div>
       </a>
       <a class="wcard" href="./sites/gallery-party.html" data-dir="right" data-delay="420">
-        <div class="project-visual"><div class="project-mock mock-editorial"><img src="./sites/photo-party/30.jpeg" class="party-img" alt=""><div class="mock-editorial-left" style="background:var(--indigo)"></div><div class="mock-editorial-right"><div class="mock-editorial-line h"></div><div class="mock-editorial-line"></div><div class="mock-editorial-line s"></div><div class="mock-editorial-line"></div></div></div><div class="project-tag">Events</div></div>
-        <div class="project-body"><div class="project-stack"><span class="stack-tag">Photoshop</span><span class="stack-tag">InDesign</span></div><h3>Party Posters — Event Advertising</h3><p>Festive design for events — combining energy and colour in a visual identity that captures attention at first glance.</p><div class="project-link">View Campaign <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M12 2H2v10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div></div>
+        <div class="project-visual">
+          <div class="project-mock mock-editorial"><img src="./sites/photo-party/30.jpeg" class="party-img" alt="">
+            <div class="mock-editorial-left" style="background:var(--indigo)"></div>
+            <div class="mock-editorial-right">
+              <div class="mock-editorial-line h"></div>
+              <div class="mock-editorial-line"></div>
+              <div class="mock-editorial-line s"></div>
+              <div class="mock-editorial-line"></div>
+            </div>
+          </div>
+          <div class="project-tag">Events</div>
+        </div>
+        <div class="project-body">
+          <div class="project-stack"><span class="stack-tag">Photoshop</span><span class="stack-tag">InDesign</span></div>
+          <h3>Party Posters — Event Advertising</h3>
+          <p>Festive design for events — combining energy and colour in a visual identity that captures attention at first
+            glance.</p>
+          <div class="project-link">View Campaign <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M12 2H2v10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            </svg></div>
+        </div>
       </a>
     </div>
   </section>
@@ -714,24 +904,25 @@
       <!-- Item 1 -->
       <div class="timeline-item reveal">
         <div>
-          <div class="tl-company">Junior Graphic Designer</div>
-          <div class="tl-role">Lazord Centre</div>
+          <div class="tl-company">Expert Graphic Designer — Volunteer</div>
+          <div class="tl-role">Ministry of Youth & Sports Volunteers — YLY</div>
           <div class="tl-desc">
             <ol class="EXPERIENCE-ol">
-              <li class="EXPERIENCE-li">Executing creative design and graphic planning work with precision and effectiveness</li>
-              <li class="EXPERIENCE-li">Editing and enhancing opening images for clients and magazines based on requirements</li>
-              <li class="EXPERIENCE-li">Organising files effectively to achieve a more productive workflow</li>
-              <li class="EXPERIENCE-li">Designing professional social media posts to strengthen the brand's digital presence</li>
-              <li class="EXPERIENCE-li">Collaborating effectively with the team to ensure optimal project outcomes</li>
+              <li class="EXPERIENCE-li">Executing creative design and graphic planning with precision and professionalism</li>
+              <li class="EXPERIENCE-li">Editing and enhancing opening images for clients per requirements</li>
+              <li class="EXPERIENCE-li">Organising files to achieve a more effective and flexible workflow</li>
+              <li class="EXPERIENCE-li">Designing professional social media posts to strengthen brand digital presence</li>
+              <li class="EXPERIENCE-li">Collaborating with the team to ensure optimal results across projects</li>
             </ol>
           </div>
+          
           <div class="tl-tags">
             <span class="tl-tag">Art Direction</span>
             <span class="tl-tag">Print</span>
             <span class="tl-tag">Print Design</span>
           </div>
         </div>
-        <div class="tl-date">2021 — Present</div>
+        <div class="tl-date">2025 — Present</div>
       </div>
 
       <!-- Item 2 -->
@@ -754,21 +945,21 @@
             <span class="tl-tag">Campaigns</span>
           </div>
         </div>
-        <div class="tl-date">2019 — 2021</div>
+        <div class="tl-date">2024 — Present</div>
       </div>
 
       <!-- Item 3 -->
       <div class="timeline-item reveal">
         <div>
-          <div class="tl-company">Expert Graphic Designer — Volunteer</div>
-          <div class="tl-role">Ministry of Youth & Sports Volunteers — YLY</div>
+          <div class="tl-company">Junior Graphic Designer</div>
+          <div class="tl-role">Lazord Centre</div>
           <div class="tl-desc">
             <ol class="EXPERIENCE-ol">
-              <li class="EXPERIENCE-li">Executing creative design and graphic planning with precision and professionalism</li>
-              <li class="EXPERIENCE-li">Editing and enhancing opening images for clients per requirements</li>
-              <li class="EXPERIENCE-li">Organising files to achieve a more effective and flexible workflow</li>
-              <li class="EXPERIENCE-li">Designing professional social media posts to strengthen brand digital presence</li>
-              <li class="EXPERIENCE-li">Collaborating with the team to ensure optimal results across projects</li>
+              <li class="EXPERIENCE-li">Executing creative design and graphic planning work with precision and effectiveness</li>
+              <li class="EXPERIENCE-li">Editing and enhancing opening images for clients and magazines based on requirements</li>
+              <li class="EXPERIENCE-li">Organising files effectively to achieve a more productive workflow</li>
+              <li class="EXPERIENCE-li">Designing professional social media posts to strengthen the brand's digital presence</li>
+              <li class="EXPERIENCE-li">Collaborating effectively with the team to ensure optimal project outcomes</li>
             </ol>
           </div>
           <div class="tl-tags">
@@ -777,7 +968,7 @@
             <span class="tl-tag">Logo Design</span>
           </div>
         </div>
-        <div class="tl-date">2017 — 2019</div>
+        <div class="tl-date">2023 — 2024</div>
       </div>
 
     </div>
@@ -797,10 +988,9 @@
       </a>
     </div>
     <div class="contact-links reveal">
-      <a href="#" class="contact-social"><svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93V18c0-.55-.45-1-1-1s-1 .45-1 1v1.93C7.06 19.44 4.56 16.94 4.07 14H6c.55 0 1-.45 1-1s-.45-1-1-1H4.07C4.56 8.06 7.06 5.56 11 5.07V7c0 .55.45 1 1 1s1-.45 1-1V5.07C16.94 5.56 19.44 8.06 19.93 11H18c-.55 0-1 .45-1 1s.45 1 1 1h1.93c-.49 2.94-2.99 5.44-6.93 5.93z"/></svg>Behance</a>
       <a href="#" class="contact-social"><svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn</a>
       <a href="#" class="contact-social"><svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.845L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Twitter / X</a>
-      <a href="#" class="contact-social"><svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.39.6.11.82-.26.82-.58v-2.03c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02.01 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.21.7.82.58C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>GitHub</a>
+      <a target="_blank" href="https://github.com/Shady-Graphic-Designer" class="contact-social"><svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.39.6.11.82-.26.82-.58v-2.03c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02.01 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.21.7.82.58C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>GitHub</a>
     </div>
   </section>
 
@@ -808,11 +998,13 @@
     <div class="footer-container">
       <div class="footer-item item-left"><span>// SYSTEM: OPERATIONAL</span></div>
       <div class="footer-item item-center">
-        <div class="decrypt-logo">
+        <a class="my-logo-a" target="_blank" href="https://www.linkedin.com/in/abdo-shahin-ba483b400?utm_source=share_via&utm_content=profile&utm_medium=member_android">
+          <div class="decrypt-logo">
           <span class="word-abdo"></span>
           <span class="word-code"></span>
           <span class="f-cursor">_</span>
         </div>
+        </a>
       </div>
       <div class="footer-item item-right"><span>© 2026 ABDO_CODE</span></div>
     </div>

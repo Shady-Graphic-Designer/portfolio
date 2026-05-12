@@ -210,15 +210,21 @@
       flex-wrap: wrap; gap: 12px; background: var(--bg-2);
     }
     footer p { font-family: var(--ff-mono); font-size: .65rem; color: var(--ink-3); letter-spacing: .04em; }
-    .ft-logo { font-family: var(--ff-display); font-size: 1rem; font-weight: 900; }
-    .ft-logo span { color: var(--violet); font-style: italic; }
+    .ft-logo { display:flex; align-items:center; }
+    .decrypt-logo { display:flex; gap:8px; font-size:1rem; font-weight:500; color:var(--violet); }
+    .word-abdo::before { content:'ABDO'; animation:dec-a 3s steps(4) infinite; }
+    .word-code::before { content:'CODE'; animation:dec-c 3.5s steps(4) infinite; }
+    .f-cursor { animation:f-blink .6s infinite; }
+    .my-logo-a { text-decoration: none; }
+    @keyframes dec-a { 0%,100%{content:'ABDO';color:var(--violet);text-shadow:0 0 8px var(--violet-glow)} 25%{content:'X@7#';color:#fff} 50%{content:'1011';color:var(--ink-3)} 75%{content:'A_B_';color:var(--violet)} }
+    @keyframes dec-c { 0%,100%{content:'CODE';color:var(--violet);text-shadow:0 0 8px var(--violet-glow)} 30%{content:'&#$%';color:var(--ink-3)} 60%{content:'0000';color:#fff} 90%{content:'C_D_';color:var(--violet)} }
+    @keyframes f-blink { 50%{opacity:0} }
     .back-link {
       display: inline-flex; align-items: center; gap: 8px;
       font-family: var(--ff-mono); font-size: .65rem; color: var(--ink-3);
       text-decoration: none; letter-spacing: .06em; text-transform: uppercase; transition: color .2s;
     }
     .back-link:hover { color: var(--violet); }
-    .logo-img { height: 40px; width: auto; display: block; object-fit: contain; transition: transform 0.3s ease; }
 
     /* ─── HOME BUTTON ────────────────────────────────────────── */
     .floating-home-btn {
@@ -389,7 +395,13 @@
     العودة للبورتفوليو
   </a>
   <div class="ft-logo">
-    <a href=""><img src="../photo/Picsart_26-04-14_01-50-14-645.png" alt="" class="logo-img"></a>
+    <a class="my-logo-a" target="_blank" href="https://www.linkedin.com/in/abdo-shahin-ba483b400?utm_source=share_via&utm_content=profile&utm_medium=member_android">
+      <div class="decrypt-logo">
+        <span class="word-abdo"></span>
+        <span class="word-code"></span>
+        <span class="f-cursor">_</span>
+      </div>
+    </a>
   </div>
   <p>© 2025 — جميع الحقوق محفوظة</p>
 </footer>

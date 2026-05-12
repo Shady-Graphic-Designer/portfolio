@@ -329,8 +329,7 @@
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--ink-3); border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: var(--violet); }
-
-    /*__________lightbox-overlay__________*/
+        /*__________lightbox-overlay__________*/
 #lightbox {transition: opacity 0.4s ease; background: rgba(78, 70, 83, 0.7); }
 #lightbox img {transform: scale(0.3) translateY(20px);  opacity: 0;  transition: transform 0.6s var(--spring), opacity 0.5s ease; transform-origin: center;}
 #lightbox.active img {transform: scale(1) translateY(0);  opacity: 1;}
@@ -343,21 +342,23 @@
 <div id="cursor"></div>
 <div id="cursor-ring"></div>
 
+<!-- ─── HEADER ──────────────────────────────────────────────── -->
 <header>
-  <div class="header-eyebrow">Shady Ahmed — Educational Thumbnails</div>
-  <h1>Teacher<br><em>Thumbnails</em> <span class="outline">Designed</span></h1>
+  <div class="header-eyebrow">Shady Ahmed — Future Aesthetics — AI Explorations</div>
+  <h1>Synthetic<br><em>Vision</em> <span class="outline">Unbound</span></h1>
   <p class="header-sub">
-    Visual resources crafted for teachers, featuring clear, approachable thumbnails
-    that engage learners and support online teaching content.
-  </p>
+  Where human intuition meets algorithmic complexity. 
+  A collection of surreal landscapes, abstract concepts, and hyper-realistic 
+  visuals crafted through the lens of generative intelligence.
+</p>
   <div class="filter-bar">
-    <button class="filter-pill active" data-filter="all">All Works</button>
-    <button class="filter-pill" data-filter="identity">Identity</button>
-    <button class="filter-pill" data-filter="editorial">Editorial</button>
-    <button class="filter-pill" data-filter="packaging">Packaging</button>
-    <button class="filter-pill" data-filter="digital">Digital</button>
-    <button class="filter-pill" data-filter="motion">Motion</button>
-  </div>
+  <button class="filter-pill active" data-filter="all">All Generations</button>
+  <button class="filter-pill" data-filter="surreal">Surrealism</button>
+  <button class="filter-pill" data-filter="concept">Concept Art</button>
+  <button class="filter-pill" data-filter="portrait">AI Portraits</button>
+  <button class="filter-pill" data-filter="env">Environments</button>
+  <button class="filter-pill" data-filter="abstract">Abstract Tech</button>
+</div>
   <div class="header-divider"></div>
 </header>
 
@@ -389,7 +390,7 @@
 </div>
 
 <footer>
-  <a href="/index.html" class="back-link">
+  <a href="/portfolio-shady.html" class="back-link">
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
       <path d="M11 7H3M7 11l-4-4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
     </svg>
@@ -407,7 +408,7 @@
   <p>© 2025 — جميع الحقوق محفوظة</p>
 </footer>
 
-<a href="../index.html" class="floating-home-btn" title="العودة للرئيسية">
+<a href="../portfolio-shady.html" class="floating-home-btn" title="العودة للرئيسية">
   <svg width="24" height="24" class="btn-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
     <polyline points="9 22 9 12 15 12 15 22"></polyline>
@@ -455,13 +456,16 @@ const storage = getStorage(app);
    STATIC ITEMS — الصور الثابتة المحلية (تبقى كما هي تماماً)
 ══════════════════════════════════════════════════════════════ */
 const STATIC_ITEMS = [
+
   { id:10,  w:800, h:650,  cat:'digital',   title:'Teachers Planner',         desc:'واجهة تحكم تعليمية بتجربة مستخدم راقية' },
   { id:20,  w:800, h:650,  cat:'digital',   title:'Teachers Planner',         desc:'واجهة تحكم تعليمية بتجربة مستخدم راقية' },
   { id:30,  w:800, h:650,  cat:'digital',   title:'Teachers Planner',         desc:'واجهة تحكم تعليمية بتجربة مستخدم راقية' },
   { id:40,  w:800, h:650,  cat:'digital',   title:'Teachers Planner',         desc:'واجهة تحكم تعليمية بتجربة مستخدم راقية' },
   { id:50,  w:800, h:1100, cat:'motion',    title:'Nexus — هوية متحركة',      desc:'نظام حركي للعلامة في وسائل التواصل' },
-  { id:60,  w:800, h:700,  cat:'identity',  title:'Latitude — حملة إعلانية', desc:'حملة بصرية متكاملة لعلامة سفر وترفيه' }
- ];
+  { id:60,  w:800, h:700,  cat:'identity',  title:'Latitude — حملة إعلانية', desc:'حملة بصرية متكاملة لعلامة سفر وترفيه' },
+  { id:70,  w:800, h:850,  cat:'editorial', title:'Typeset — دليل طباعي',    desc:'دليل أسلوب الخط والطباعة العربية' },
+  { id:80,  w:800, h:600,  cat:'packaging', title:'Terra — عبوات قهوة',      desc:'تصميم عبوات لعلامة قهوة متخصصة' }
+];
 
 /* ══════════════════════════════════════════════════════════════
    HELPERS
@@ -532,6 +536,7 @@ function attachHoverBehavior(item) {
   item.addEventListener('mouseleave', leaveHover);
 }
 
+
 /* ══════════════════════════════════════════════════════════════
    BUILD ITEM — الصور المحلية الثابتة
 ══════════════════════════════════════════════════════════════ */
@@ -542,8 +547,8 @@ function buildStaticItem(item) {
 
   a.innerHTML = `
     <div class="g-img-wrap">
-      <img src="./photo-Thumbnails-for-Teachers/${item.id}.jpg" alt="${item.title}"
-           loading="lazy" class="Thumbnails-for-Teachers-img" style="object-position:top"
+      <img src="./photo-ai/${item.id}.jpg" alt="${item.title}"
+           loading="lazy" class="lazord-img" style="object-position:top"
            width="${item.w}" height="${item.h}">
       <div class="g-deep-indicator"></div>
       <div class="g-overlay">
