@@ -58,7 +58,7 @@
     body:has(button:hover) #cursor { width:20px; height:20px; }
     body:has(a:hover) #cursor-ring,
     body:has(button:hover) #cursor-ring { width:58px; height:58px; opacity:.35; }
-    @media(hover:none){ body{cursor:auto} #cursor,#cursor-ring{display:none} }
+    @media(hover:none), (pointer:coarse) { body { cursor: auto } #cursor, #cursor-ring { display: none } }
 
     /* ─── NAV ─────────────────────────────────────────────────── */
     nav {
@@ -546,6 +546,10 @@
           <div class="stat-num">65<span>+</span></div>
           <div class="stat-label">Happy Clients</div>
         </div>
+        <div>
+          <div class="stat-num" id="visitorCount">0<span>+</span></div>
+          <div class="stat-label">Site Visitors</div>
+        </div>
       </div>
     </div>
     <div class="hero-right">
@@ -686,7 +690,6 @@
               <div class="mock-poster-line short"></div>
             </div>
           </div>
-          <div class="project-tag">Visual Identity</div>
         </div>
         <div class="project-body">
           <div class="project-stack"><span class="stack-tag">Illustrator</span><span
@@ -710,7 +713,6 @@
               <div class="mock-swatch" style="background:#09080e"></div>
             </div>
           </div>
-          <div class="project-tag">Logo Design</div>
         </div>
         <div class="project-body">
           <div class="project-stack"><span class="stack-tag">Illustrator</span><span class="stack-tag">Figma</span></div>
@@ -735,7 +737,6 @@
               <div class="mock-editorial-line s"></div>
             </div>
           </div>
-          <div class="project-tag">Editorial</div>
         </div>
         <div class="project-body">
           <div class="project-stack"><span class="stack-tag">InDesign</span><span class="stack-tag">Illustrator</span>
@@ -759,7 +760,6 @@
               <div class="mock-swatch" style="background:#09080e"></div>
             </div>
           </div>
-          <div class="project-tag">Packaging</div>
         </div>
         <div class="project-body">
           <div class="project-stack"><span class="stack-tag">Illustrator</span><span class="stack-tag">Photoshop</span>
@@ -783,7 +783,6 @@
               <div class="mock-motion-line" style="width:55%"></div>
             </div>
           </div>
-          <div class="project-tag">Motion Graphics</div>
         </div>
         <div class="project-body">
           <div class="project-stack"><span class="stack-tag">After Effects</span><span
@@ -808,7 +807,6 @@
               <div class="mock-editorial-line"></div>
             </div>
           </div>
-          <div class="project-tag">Certificates</div>
         </div>
         <div class="project-body">
           <div class="project-stack"><span class="stack-tag">Photoshop</span><span class="stack-tag">InDesign</span></div>
@@ -831,7 +829,6 @@
               <div class="mock-swatch" style="background:#09080e"></div>
             </div>
           </div>
-          <div class="project-tag">Packaging</div>
         </div>
         <div class="project-body">
           <div class="project-stack"><span class="stack-tag">Illustrator</span><span class="stack-tag">Photoshop</span>
@@ -854,7 +851,6 @@
               <div class="mock-motion-line" style="width:55%"></div>
             </div>
           </div>
-          <div class="project-tag">Motion Graphics</div>
         </div>
         <div class="project-body">
           <div class="project-stack"><span class="stack-tag">After Effects</span><span
@@ -878,7 +874,6 @@
               <div class="mock-editorial-line"></div>
             </div>
           </div>
-          <div class="project-tag">Events</div>
         </div>
         <div class="project-body">
           <div class="project-stack"><span class="stack-tag">Photoshop</span><span class="stack-tag">InDesign</span></div>
@@ -1015,7 +1010,7 @@
   const cursor = document.getElementById('cursor');
   const ring   = document.getElementById('cursor-ring');
   let rx=0, ry=0, mx=0, my=0;
-  if (!window.matchMedia('(hover:none)').matches) {
+  if (!window.matchMedia('(hover:none), (pointer:coarse)').matches) {
     document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
     (function loop() {
       rx += (mx - rx) * .18; ry += (my - ry) * .18;
@@ -1050,6 +1045,35 @@
     });
   }, { threshold: .1 });
   document.querySelectorAll('.reveal').forEach(el => revealIO.observe(el));
+
+  /* ── VISITOR COUNTER ── */
+  const visitorCountEl = document.getElementById('visitorCount');
+  if (visitorCountEl) {
+    const countApiUrl = 'https://api.countapi.xyz/hit/shady-portfolio/site-visitors';
+    const animateCounter = (el, start, end, duration) => {
+      const startTime = performance.now();
+      const step = (currentTime) => {
+        const progress = Math.min((currentTime - startTime) / duration, 1);
+        const value = Math.floor(start + (end - start) * progress);
+        el.innerHTML = value + '<span>+</span>';
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+
+    fetch(countApiUrl)
+      .then(response => response.json())
+      .then(data => {
+        const count = Number(data.value || 0);
+        const storedPrevious = Number(localStorage.getItem('visitorCountLast') || '0');
+        const startValue = Math.max(storedPrevious, 0);
+        localStorage.setItem('visitorCountLast', count);
+        animateCounter(visitorCountEl, startValue, count, 1200);
+      })
+      .catch(() => {
+        visitorCountEl.innerHTML = '0<span>+</span>';
+      });
+  }
 
   /* ── WORK CARDS ── */
   const cardIO = new IntersectionObserver(entries => {
