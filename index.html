@@ -1445,39 +1445,47 @@
     navLinks.forEach(a => { a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--violet)' : ''; });
   });
 
-      /* ── STATS COUNTER FIXED ── */
+      /* ── STATS COUNTER FIXED (Anti-NaN) ── */
 const statNumbers = document.querySelectorAll('.stat-num');
 
 const statsObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       const targetElement = entry.target;
-      // قراءة الرقم المستهدف من الـ data-count
-      const targetValue = parseInt(targetElement.getAttribute('data-count'));
-      let current = 0;
       
-      // تحديد السرعة: كلما كبر الرقم زادت السرعة لضمان الانتهاء في وقت معقول
-      const duration = 2000; // المدة الإجمالية 2 ثانية
-      const increment = targetValue / (duration / 16); // 16ms هي مدة الفريم الواحد تقريباً
+      // استخراج الأرقام فقط من الـ attribute لضمان عدم حدوث NaN
+      const rawValue = targetElement.getAttribute('data-count');
+      const targetValue = parseInt(rawValue.replace(/\D/g, '')) || 0; // تنظيف من أي حروف
+      
+      let current = 0;
+      const duration = 2000; 
+      const increment = targetValue / (duration / 16); 
       
       const updateCount = () => {
         current += increment;
         
         if (current < targetValue) {
-          targetElement.innerText = Math.ceil(current); // استخدام ceil لتقريب الأرقام
-          requestAnimationFrame(updateCount); // استخدام requestAnimationFrame أفضل من setInterval
+          targetElement.innerText = Math.ceil(current);
+          requestAnimationFrame(updateCount);
         } else {
-          targetElement.innerText = targetValue; // التأكد من الوقوف عند الرقم بالضبط
+          // نضع الرقم الأصلي (rawValue) في النهاية إذا كنت تريد إظهار علامات مثل + أو %
+          targetElement.innerText = rawValue; 
         }
       };
 
-      updateCount();
-      statsObserver.unobserve(targetElement); // التوقف عن مراقبة العنصر بعد بدء العد
+      if (targetValue > 0) {
+        updateCount();
+      } else {
+        targetElement.innerText = rawValue;
+      }
+      
+      statsObserver.unobserve(targetElement);
     }
   });
 }, { threshold: 0.5 });
 
 statNumbers.forEach(num => statsObserver.observe(num));
+
 
 </script>
 </body>
