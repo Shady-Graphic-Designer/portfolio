@@ -1445,18 +1445,32 @@
     navLinks.forEach(a => { a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--violet)' : ''; });
   });
 
-  /* ── SKILL BARS ── */
-  const skillIO = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        const fill = e.target;
-        const target = fill.dataset.width || '0';
-        setTimeout(() => { fill.style.width = target + '%'; }, 200);
-        skillIO.unobserve(fill);
+  /* ── SKILL BARS & STATS COUNTER ── */
+  const statNumbers = document.querySelectorAll('.stat-num');
+  
+  const statsObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const target = entry.target;
+        const countTo = parseInt(target.getAttribute('data-count'));
+        let current = 0;
+        const duration = 2000; // مدة العد (2 ثانية)
+        const stepTime = Math.abs(Math.floor(duration / countTo));
+        
+        const timer = setInterval(() => {
+          current += 1;
+          target.innerText = current;
+          if (current == countTo) {
+            clearInterval(timer);
+          }
+        }, stepTime);
+        
+        statsObserver.unobserve(target); // ليعمل مرة واحدة فقط
       }
     });
-  }, { threshold: 0.3 });
-  document.querySelectorAll('.skill-bar-fill').forEach(el => skillIO.observe(el));
+  }, { threshold: 0.5 });
+
+  statNumbers.forEach(num => statsObserver.observe(num));
 </script>
 </body>
 </html>
