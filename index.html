@@ -121,7 +121,7 @@
       content:''; position:absolute; inset:0; pointer-events:none; opacity:.4;
       background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ece7f8' fill-opacity='0.025'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E");
     }
-    .hero-left { position:relative; z-index:2; text-align:left; }
+    .hero-left { position:relative; z-index:2; text-align:left;  }
     .hero-eyebrow {
       display:inline-flex; align-items:center; gap:10px;
       font-family:var(--ff-mono); font-size:.7rem; color:var(--violet);
@@ -763,17 +763,21 @@
 }
 
 @media (max-width: 400px) {
-  .hero { padding: 80px 4% 36px; gap: 6px; }
-  .profile-main{position: relative; right: -50px; width: 110px; height: 110px; }
-  .hero h1 { font-size: 3rem; }
-  .icon-orbit { width: 28px; height: 28px; }
-  .canvas-label-text , .canvas-status { font-size: .3rem; }
-  .canvas-chip{ font-size: .4rem; }
-  .hero-desc , .hero-actions { width: 200%; }
-  .canvas-wrap {
-    width: 150px;
-    height:150px; /* 440 × (115/360) */
+  :root {
+    --orbit-distance: 60px;   
   }
+  .hero { padding: 80px 4% 36px; gap: 6px; }
+  .profile-main{position: relative; right: -65px; width: 110px; height: 110px;  }
+  .hero h1 { font-size: 3rem; }
+  .icon-orbit { width: 28px; height: 28px; top: 80px;}
+  .canvas-label-text , .canvas-status { font-size: .3rem; }
+  .canvas-chip{ font-size: .4rem;   }
+  .chip-1 ,.chip-3 { right: -6%; z-index: 2;}
+  .chip-2 { left: -20%; }
+  .hero-desc , .hero-actions { width: 342px; }
+  .profile-scene { width: auto; height: auto; }
+  .canvas-wrap { width: 150px;height:150px; }
+  .canvas-card {bottom: -10px;}
 
   .hero-stats { gap: 12px; }
   .stat-num   { font-size: 1.5rem; }
@@ -781,6 +785,22 @@
   .about-ol-1 { grid-template-columns: repeat(1, 1fr); }
   .about-ol-2 { grid-template-columns: repeat(1, 1fr); }
   .about-ol-3 { grid-template-columns: repeat(1, 1fr); }
+ 
+ 
+  @keyframes orbit {
+    0% {
+      /* جعلنا الـ translateY صغيرة جداً (-4px بدلاً من -20px) */
+      transform: rotateY(0deg) translateZ(var(--orbit-distance)) translateY(-1px);
+    }
+    50% {
+      /* وفي منتصف الدورة تنزل بشكل بسيط أيضاً */
+      transform: rotateY(180deg) translateZ(var(--orbit-distance)) translateY(1px);
+    }
+    100% {
+      transform: rotateY(360deg) translateZ(var(--orbit-distance)) translateY(-1px);
+    }
+  }
+
 }
 
 @media (max-width: 768px) {
