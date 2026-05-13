@@ -1445,32 +1445,40 @@
     navLinks.forEach(a => { a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--violet)' : ''; });
   });
 
-  /* ── SKILL BARS & STATS COUNTER ── */
-  const statNumbers = document.querySelectorAll('.stat-num');
-  
-  const statsObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const target = entry.target;
-        const countTo = parseInt(target.getAttribute('data-count'));
-        let current = 0;
-        const duration = 2000; // مدة العد (2 ثانية)
-        const stepTime = Math.abs(Math.floor(duration / countTo));
-        
-        const timer = setInterval(() => {
-          current += 1;
-          target.innerText = current;
-          if (current == countTo) {
-            clearInterval(timer);
-          }
-        }, stepTime);
-        
-        statsObserver.unobserve(target); // ليعمل مرة واحدة فقط
-      }
-    });
-  }, { threshold: 0.5 });
+      /* ── STATS COUNTER FIXED ── */
+const statNumbers = document.querySelectorAll('.stat-num');
 
-  statNumbers.forEach(num => statsObserver.observe(num));
+const statsObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const targetElement = entry.target;
+      // قراءة الرقم المستهدف من الـ data-count
+      const targetValue = parseInt(targetElement.getAttribute('data-count'));
+      let current = 0;
+      
+      // تحديد السرعة: كلما كبر الرقم زادت السرعة لضمان الانتهاء في وقت معقول
+      const duration = 2000; // المدة الإجمالية 2 ثانية
+      const increment = targetValue / (duration / 16); // 16ms هي مدة الفريم الواحد تقريباً
+      
+      const updateCount = () => {
+        current += increment;
+        
+        if (current < targetValue) {
+          targetElement.innerText = Math.ceil(current); // استخدام ceil لتقريب الأرقام
+          requestAnimationFrame(updateCount); // استخدام requestAnimationFrame أفضل من setInterval
+        } else {
+          targetElement.innerText = targetValue; // التأكد من الوقوف عند الرقم بالضبط
+        }
+      };
+
+      updateCount();
+      statsObserver.unobserve(targetElement); // التوقف عن مراقبة العنصر بعد بدء العد
+    }
+  });
+}, { threshold: 0.5 });
+
+statNumbers.forEach(num => statsObserver.observe(num));
+
 </script>
 </body>
 </html>
