@@ -69,7 +69,7 @@
       direction:ltr;
     }
     .nav-logo { display:flex; align-items:center; height:100%; text-decoration:none; }
-    .logo-img { height:20px; width:auto; display:block; object-fit:contain; transition:transform .3s ease; }
+    .logo-img { height:40px; width:auto; display:block; object-fit:contain; transition:transform .3s ease; }
     .nav-logo:hover .logo-img { transform:scale(1.05); }
     .nav-links { display:flex; align-items:center; gap:32px; list-style:none; }
     .nav-links a {
@@ -662,6 +662,7 @@
   .nav-links     { display: none; }
   .nav-cta       { display: none; }
   .nav-hamburger { display: flex; }
+  .logo-img{height: 32px;}
 
   /* ── HERO ── */
   .hero { display: grid;  grid-template-columns: 1fr auto;   align-items: start;   
@@ -722,6 +723,9 @@
   :root {
     --orbit-distance: 80px;   
   }
+    .logo-img{height: 26px;}
+    nav{ padding: 10px 2%; }
+
   .hero { padding: 84px 4% 40px; gap: 8px; overflow: visible; }
   .hero-desc{ max-width: 600px; width: 160%; }
   .hero h1 { font-size: 3.8rem }
@@ -777,6 +781,7 @@
     --orbit-distance: 60px;   
   }
   nav{ padding: 8px 2%; }
+  .logo-img{height: 20px;}
   .hero { padding: 80px 4% 36px; gap: 6px; }
   .profile-main{position: relative; right: -65px; width: 110px; height: 110px;  }
   .hero h1 { font-size: 3rem; }
