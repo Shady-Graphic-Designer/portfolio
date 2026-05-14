@@ -69,7 +69,7 @@
       direction:ltr;
     }
     .nav-logo { display:flex; align-items:center; height:100%; text-decoration:none; }
-    .logo-img { height:40px; width:auto; display:block; object-fit:contain; transition:transform .3s ease; }
+    .logo-img { height:20px; width:auto; display:block; object-fit:contain; transition:transform .3s ease; }
     .nav-logo:hover .logo-img { transform:scale(1.05); }
     .nav-links { display:flex; align-items:center; gap:32px; list-style:none; }
     .nav-links a {
@@ -776,6 +776,7 @@
   :root {
     --orbit-distance: 60px;   
   }
+  nav{ padding: 8px 2%; }
   .hero { padding: 80px 4% 36px; gap: 6px; }
   .profile-main{position: relative; right: -65px; width: 110px; height: 110px;  }
   .hero h1 { font-size: 3rem; }
@@ -789,7 +790,7 @@
   .canvas-wrap { width: 150px;height:150px; }
   .canvas-card {bottom: -10px;}
 
-  .hero-stats { gap: 12px; }
+  .hero-stats { gap: 12px; display: grid ;  grid-template-columns: repeat(2, 1fr);}
   .stat-num   { font-size: 1.5rem; }
 
   .about-ol-1 { grid-template-columns: repeat(1, 1fr); }
