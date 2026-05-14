@@ -286,31 +286,6 @@
       font-family: var(--ff-mono); font-size: 1rem; letter-spacing: 2px;
     }
 
-    /* ─── UPLOAD ZONE ────────────────────────────────────────── */
-    #upload-zone {
-      position: fixed; bottom: 32px; left: 32px; z-index: 9000;
-      display: flex; flex-direction: column; gap: 10px; align-items: flex-start;
-    }
-    #upload-label {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-family: var(--ff-mono); font-size: .68rem; letter-spacing: .1em;
-      text-transform: uppercase; color: #fff; background: var(--violet);
-      border-radius: 100px; padding: 11px 22px; cursor: pointer;
-      box-shadow: 0 0 24px var(--violet-glow);
-      transition: opacity .3s, box-shadow .3s; border: 1px solid rgba(255,255,255,.15); user-select: none;
-    }
-    #upload-label:hover { box-shadow: 0 0 36px var(--violet-glow); }
-    #upload-label.disabled { opacity: .45; pointer-events: none; }
-
-    #upload-progress-wrap {
-      display: none; width: 180px; background: var(--surface);
-      border: 1px solid var(--border-hi); border-radius: 100px; overflow: hidden; height: 5px;
-    }
-    #upload-progress-bar { height: 100%; width: 0%; background: var(--violet); transition: width .2s ease, background .4s; }
-    #upload-status { display: none; font-family: var(--ff-mono); font-size: .62rem; color: var(--ink-2); letter-spacing: .04em; }
-    #upload-status.success { color: #4ade80; }
-    #upload-status.error   { color: #f87171; }
-
     /* ─── SKELETON ───────────────────────────────────────────── */
     .skeleton-item {
       break-inside: avoid; margin-bottom: 15px;
@@ -375,16 +350,6 @@
   <span class="lightbox-close">&times;</span>
   <img class="lightbox-content" id="lightbox-img">
   <div id="lightbox-caption" class="lightbox-caption"></div>
-</div>
-
-<!-- ─── UPLOAD ZONE ───────────────────────────────────────────── -->
-<div id="upload-zone">
-  <label id="upload-label">
-    ✦ رفع صورة
-    <input id="upload-input" type="file" accept="image/*" style="display:none">
-  </label>
-  <div id="upload-progress-wrap"><div id="upload-progress-bar"></div></div>
-  <div id="upload-status"></div>
 </div>
 
 <footer>
@@ -675,92 +640,6 @@ async function loadGalleryFromFirestore() {
     console.warn('Firebase: تأكد من إضافة مفاتيح الـ config.', err.message);
   }
 }
-
-/* ══════════════════════════════════════════════════════════════
-   2. UPLOAD — رفع صورة إلى Storage وحفظها في Firestore
-══════════════════════════════════════════════════════════════ */
-const uploadInput        = document.getElementById('upload-input');
-const uploadLabel        = document.getElementById('upload-label');
-const uploadProgressWrap = document.getElementById('upload-progress-wrap');
-const uploadProgressBar  = document.getElementById('upload-progress-bar');
-const uploadStatus       = document.getElementById('upload-status');
-
-async function uploadImage(file, meta = {}, onProgress) {
-  const uniqueName = `gallery/${Date.now()}-${file.name}`;
-  const storageRef  = ref(storage, uniqueName);
-  const uploadTask  = uploadBytesResumable(storageRef, file);
-
-  return new Promise((resolve, reject) => {
-    uploadTask.on(
-      'state_changed',
-      snapshot => {
-        const pct = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-        if (onProgress) onProgress(pct);
-      },
-      reject,
-      async () => {
-        const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-        await addDoc(collection(db, 'gallery'), {
-          url:       downloadURL,
-          title:     meta.title    || file.name.split('.')[0],
-          category:  meta.category || 'identity',
-          desc:      meta.desc     || '',
-          createdAt: serverTimestamp()
-        });
-        resolve(downloadURL);
-      }
-    );
-  });
-}
-
-/* ─── 4. LOADING STATE ───────────────────────────────────────── */
-uploadInput.addEventListener('change', async (e) => {
-  const file = e.target.files[0];
-  if (!file) return;
-
-  uploadProgressWrap.style.display   = 'block';
-  uploadStatus.style.display         = 'block';
-  uploadStatus.className             = '';
-  uploadStatus.textContent           = 'جارٍ الرفع...';
-  uploadProgressBar.style.background = 'var(--violet)';
-  uploadProgressBar.style.width      = '0%';
-  uploadLabel.classList.add('disabled');
-
-  try {
-    const downloadURL = await uploadImage(
-      file,
-      { title: file.name.split('.')[0], category: 'identity' },
-      (pct) => { uploadProgressBar.style.width = pct + '%'; uploadStatus.textContent = pct + '%'; }
-    );
-
-    uploadStatus.textContent           = '✓ تم الرفع بنجاح';
-    uploadStatus.className             = 'success';
-    uploadProgressBar.style.background = '#4ade80';
-    uploadProgressBar.style.width      = '100%';
-
-    // إضافة الصورة مباشرةً في أعلى الجاليري بدون reload
-    const newItem = buildFirebaseItem({
-      url: downloadURL, title: file.name.split('.')[0], category: 'identity', desc: ''
-    });
-    newItem.style.transitionDelay = '0s';
-    grid.insertBefore(newItem, grid.firstChild);
-    setTimeout(() => revealIO.observe(newItem), 50);
-
-  } catch (err) {
-    console.error(err);
-    uploadStatus.textContent           = '✗ فشل الرفع — تحقق من Firebase Config & Rules';
-    uploadStatus.className             = 'error';
-    uploadProgressBar.style.background = '#f87171';
-  } finally {
-    uploadInput.value = '';
-    setTimeout(() => {
-      uploadProgressWrap.style.display = 'none';
-      uploadStatus.style.display       = 'none';
-      uploadProgressBar.style.width    = '0%';
-      uploadLabel.classList.remove('disabled');
-    }, 3000);
-  }
-});
 
 /* ══════════════════════════════════════════════════════════════
    CURSOR
