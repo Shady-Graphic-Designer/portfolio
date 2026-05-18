@@ -281,10 +281,19 @@
       color: var(--ink); font-size: 40px; font-weight: bold; cursor: pointer; transition: color .3s;
     }
     .lightbox-close:hover { color: var(--violet); }
-    .lightbox-caption {
+        .lightbox-caption {
       margin-top: 20px; color: var(--violet);
       font-family: var(--ff-mono); font-size: 1rem; letter-spacing: 2px;
     }
+    .lightbox-prev, .lightbox-next {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.1); border: none; color: white;
+      font-size: 30px; width: 50px; height: 50px; border-radius: 50%;
+      cursor: pointer; transition: background 0.3s; z-index: 20001;
+    }
+    .lightbox-prev:hover, .lightbox-next:hover { background: rgba(255,255,255,0.3); }
+    .lightbox-prev { left: 20px; }
+    .lightbox-next { right: 20px; }
 
     /* ─── SKELETON ───────────────────────────────────────────── */
     .skeleton-item {
@@ -349,6 +358,8 @@
 
 <div id="lightbox" class="lightbox">
   <span class="lightbox-close">&times;</span>
+  <button class="lightbox-prev">&larr;</button>
+  <button class="lightbox-next">&rarr;</button>
   <img class="lightbox-content" id="lightbox-img">
   <div id="lightbox-caption" class="lightbox-caption"></div>
 </div>
@@ -420,13 +431,13 @@ const storage = getStorage(app);
    STATIC ITEMS — الصور الثابتة المحلية (تبقى كما هي تماماً)
 ══════════════════════════════════════════════════════════════ */
 const STATIC_ITEMS = [
-  { id:20,  w:800, h:650,  cat:'digital',   title:'Teachers Planner',         desc:'واجهة تحكم تعليمية بتجربة مستخدم راقية' },
-  { id:30,  w:800, h:650,  cat:'digital',   title:'Teachers Planner',         desc:'واجهة تحكم تعليمية بتجربة مستخدم راقية' },
-  { id:40,  w:800, h:650,  cat:'digital',   title:'Teachers Planner',         desc:'واجهة تحكم تعليمية بتجربة مستخدم راقية' },
-  { id:50,  w:800, h:1100, cat:'motion',    title:'Nexus — هوية متحركة',      desc:'نظام حركي للعلامة في وسائل التواصل' },
-  { id:60,  w:800, h:700,  cat:'identity',  title:'Latitude — حملة إعلانية', desc:'حملة بصرية متكاملة لعلامة سفر وترفيه' },
-  { id:70,  w:800, h:850,  cat:'editorial', title:'Typeset — دليل طباعي',    desc:'دليل أسلوب الخط والطباعة العربية' }, 
-  { id:110, w:800, h:680,  cat:'digital',   title:'Aura — تطبيق موبايل',     desc:'تصميم تجربة مستخدم لتطبيق صحة' }
+  { id:20,  w:800, h:650,  cat:'digital',   title:'icon',         desc:'واجهة تحكم تعليمية بتجربة مستخدم راقية' },
+  { id:30,  w:800, h:650,  cat:'digital',   title:'icon',         desc:'واجهة تحكم تعليمية بتجربة مستخدم راقية' },
+  { id:40,  w:800, h:650,  cat:'digital',   title:'icon',         desc:'واجهة تحكم تعليمية بتجربة مستخدم راقية' },
+  { id:50,  w:800, h:1100, cat:'motion',    title:'icon',      desc:'نظام حركي للعلامة في وسائل التواصل' },
+  { id:60,  w:800, h:700,  cat:'identity',  title:'icon', desc:'حملة بصرية متكاملة لعلامة سفر وترفيه' },
+  { id:70,  w:800, h:850,  cat:'editorial', title:'icon',    desc:'دليل أسلوب الخط والطباعة العربية' }, 
+  { id:110, w:800, h:680,  cat:'digital',   title:'icon',     desc:'تصميم تجربة مستخدم لتطبيق صحة' }
   ];
 
 /* ══════════════════════════════════════════════════════════════
@@ -574,13 +585,35 @@ const lightbox        = document.getElementById('lightbox');
 const lightboxImg     = document.getElementById('lightbox-img');
 const lightboxCaption = document.getElementById('lightbox-caption');
 const lightboxClose   = document.querySelector('.lightbox-close');
+const lightboxPrev    = document.querySelector('.lightbox-prev');
+const lightboxNext    = document.querySelector('.lightbox-next');
 
-function openLightbox(src, title) {
+let currentImages = [];
+let currentIndex = 0;
+
+function openLightbox(src, title, index) {
+  currentIndex = index;
   lightboxImg.src = src; lightboxCaption.textContent = title;
   lightbox.style.display = 'flex';
   setTimeout(() => lightbox.classList.add('active'), 10);
   document.getElementById('cursor').style.opacity = '0';
   document.getElementById('cursor-ring').style.opacity = '0';
+  updateNavigationButtons();
+}
+
+function updateNavigationButtons() {
+  lightboxPrev.style.display = currentIndex > 0 ? 'block' : 'none';
+  lightboxNext.style.display = currentIndex < currentImages.length - 1 ? 'block' : 'none';
+}
+
+function navigateLightbox(direction) {
+  currentIndex += direction;
+  if (currentIndex < 0) currentIndex = 0;
+  if (currentIndex >= currentImages.length) currentIndex = currentImages.length - 1;
+  const img = currentImages[currentIndex];
+  lightboxImg.src = img.src;
+  lightboxCaption.textContent = img.title;
+  updateNavigationButtons();
 }
 
 function closeLightbox() {
@@ -595,13 +628,22 @@ function closeLightbox() {
 lightboxClose.addEventListener('click', closeLightbox);
 lightbox.addEventListener('click', e => { if (e.target !== lightboxImg) closeLightbox(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+lightboxPrev.addEventListener('click', () => navigateLightbox(-1));
+lightboxNext.addEventListener('click', () => navigateLightbox(1));
 
 // تفويض الأحداث — يغطي العناصر المضافة ديناميكياً
 grid.addEventListener('click', e => {
   const item = e.target.closest('.g-item');
   if (!item) return;
   e.preventDefault();
-  openLightbox(item.querySelector('img').src, item.querySelector('.g-title')?.textContent || '');
+  const img = item.querySelector('img');
+  const title = item.querySelector('.g-title')?.textContent || '';
+  const index = Array.from(grid.querySelectorAll('.g-item')).indexOf(item);
+  currentImages = Array.from(grid.querySelectorAll('.g-item')).map(item => ({
+    src: item.querySelector('img').src,
+    title: item.querySelector('.g-title')?.textContent || ''
+  }));
+  openLightbox(img.src, title, index);
 });
 
 /* ══════════════════════════════════════════════════════════════

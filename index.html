@@ -184,11 +184,7 @@
   animation: fadeIn 1s .3s var(--expo) forwards;
 }
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   canvas-wrap: الحجم الثابت بالبكسلات — كل العناصر
-   جوّاه بنسب مئوية منه. لما نغير حجمه في الميديا
-   كل حاجة بتتصغّر تلقائياً بنفس النسب.
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
 .canvas-wrap {
   position: relative;
   width: 360px;
@@ -201,7 +197,6 @@
   position: relative;
 }
 
-/* canvas-inner: الارتفاع = 100% ناقص الـ label (11.8%) */
 .canvas-inner {
   width: 100%;
   height: 88.2%;
@@ -211,7 +206,6 @@
   position: relative;
 }
 
-/* ── 3D SCENE ── */
 .profile-scene {
   width: 800px;
   height: 800px;
@@ -273,48 +267,44 @@
 .ps { animation: orbit3D 10s linear infinite, floating 3s ease-in-out infinite; }
 .ai { animation: orbit3D 10s linear infinite, floating 3s ease-in-out infinite; animation-delay: -5s, -1s; }
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   SHAPES — كل القيم نسب مئوية من canvas-wrap (360×440)
-   width/left/right  → نسبة من عرض  360px
-   height/top/bottom → نسبة من ارتفاع 440px
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
 .shape-circle {
   position: absolute;
-  width:  55.6%;   /* 200px / 360px */
-  height: 45.5%;   /* 200px / 440px */
+  width:  55.6%;  
+  height: 45.5%;  
   border-radius: 50%;
   background: var(--violet);
   opacity: .8;
-  top:  9.1%;      /* 40px / 440px */
-  left: 16.7%;     /* 60px / 360px */
+  top:  9.1%;    
+  left: 16.7%;   
 }
 
 .shape-rect {
   position: absolute;
-  width:  36.1%;   /* 130px / 360px */
-  height: 40.9%;   /* 180px / 440px */
+  width:  36.1%;  
+  height: 40.9%; 
   background: var(--indigo);
   border-radius: 2px;
   bottom: 0;
-  right: 13.9%;    /* 50px / 360px */
+  right: 13.9%;  
 }
 
 .shape-oval {
   position: absolute;
-  width:  44.4%;   /* 160px / 360px */
-  height: 18.2%;   /* 80px / 440px  */
+  width:  44.4%;  
+  height: 18.2%;  
   background: rgba(185,110,255,.35);
   border-radius: 50%;
-  bottom: 25%;     /* 110px / 440px */
-  left:    8.3%;   /* 30px / 360px  */
+  bottom: 25%;  
+  left:    8.3%; 
 }
 
 .shape-line {
   position: absolute;
   width: 1px;
-  height: 27.3%;   /* 120px / 440px */
+  height: 27.3%;  
   background: rgba(255,255,255,.1);
-  top:  6.8%;      /* 30px / 440px  */
+  top:  6.8%;  
   left: 50%;
   animation: scanline 3s ease-in-out infinite;
 }
@@ -324,9 +314,7 @@
   50%     { transform: translateX(24px) scaleY(.6); opacity: .22; }
 }
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   CANVAS LABEL — ارتفاعه 11.8% من الـ canvas-wrap
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
 .canvas-label {
   position: absolute;
   bottom: 0; left: 0; right: 0;
@@ -368,10 +356,7 @@
   50%     { opacity: .3; }
 }
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   CHIPS — المواضع نسب مئوية من canvas-wrap (360×440)
-   القيم السالبة (right/left) = برا الـ canvas-wrap
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
 .canvas-chip {
   position: absolute;
   background: var(--surface);
@@ -387,25 +372,25 @@
   z-index: 1000;
 }
 
-/* chip-1 "Illustrator" — يمين فوق */
+
 .chip-1 {
-  top:    3.6%;    /* 16px / 440px  */
-  right: -13.3%;   /* -48px / 360px */
+  top:    3.6%;    
+  right: -13.3%;   
   animation-delay: 0s;
   z-index: 10000;
 }
 
-/* chip-2 "Figma" — شمال وسط */
+
 .chip-2 {
-  bottom: 25%;     /* 110px / 440px */
-  left:  -15%;     /* -54px / 360px */
+  bottom: 25%;   
+  left:  -15%;   
   animation-delay: 1s;
 }
 
-/* chip-3 "InDesign" — يمين تحت */
+
 .chip-3 {
-  bottom: 9.1%;    /* 40px / 440px  */
-  right: -11.7%;   /* -42px / 360px */
+  bottom: 9.1%;    
+  right: -11.7%;  
   animation-delay: .5s;
 }
 
@@ -477,6 +462,9 @@
     .wcard:nth-child(4) { margin-top:26px; }
     .wcard:nth-child(5) { margin-top:6px; }
     .wcard:nth-child(6) { margin-top:42px; }
+    .wcard:nth-child(7) { margin-top:20px;margin-bottom: 20px; }
+    .wcard:nth-child(8) { margin-top:0px; margin-bottom: 40px;}
+    .wcard:nth-child(9) { margin-top:18px; margin-bottom: 30px;}
     .wcard[data-dir="left"]  { opacity:0; transform:translateX(-50px); }
     .wcard[data-dir="right"] { opacity:0; transform:translateX(50px); }
     .wcard[data-dir="up"]    { opacity:0; transform:translateY(50px); }
@@ -536,6 +524,7 @@
     .about-ol-1{display: grid ; grid-template-columns: repeat(2,1fr);}
     .about-ol-2{display: grid ; grid-template-columns: repeat(3,1fr);}
     .about-ol-3{display: grid ; grid-template-columns: repeat(3,1fr);}
+  
     /* ─── EXPERIENCE — FIXED LTR ──────────────────────────────── */
     #experience { padding:100px 5%; }
     .exp-header { margin-bottom:56px; }
@@ -1003,11 +992,14 @@
   </section>
 
   <!-- WORK -->
+   
   <section id="work">
     <div class="section-head reveal">
       <h2><small>// Selected Work</small>Projects</h2>
       <a href="#">View All Work →</a>
     </div>
+      <!-- card---1 -->
+
     <div class="work-stagger-grid">
       <a class="wcard" href="./sites/gallery-Thumbnails-for-Teachers.html" data-dir="left" data-delay="0">
         <div class="project-visual">
@@ -1028,11 +1020,13 @@
           <h3>Thumbnails for Teachers</h3>
           <p>Educational thumbnail design for content interfaces — enhancing clarity and making every lesson visually
             engaging.</p>
-          <div class="project-link">View Case Study <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <div class="project-link">View Thumbnails <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M12 2H2v10M12 2L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
             </svg></div>
         </div>
       </a>
+      <!-- card---2 -->
+
       <a class="wcard" href="./sites/gallery - ai.html" data-dir="up" data-delay="120">
         <div class="project-visual">
           <div class="project-mock mock-brand"><img src="./sites/photo-ai/10.jpg" alt="" class="ai-img">
@@ -1055,6 +1049,8 @@
             </svg></div>
         </div>
       </a>
+      <!-- card---3 -->
+
       <a class="wcard" href="./sites/gallery - El_3bd.html" data-dir="right" data-delay="240">
         <div class="project-visual">
           <div class="project-mock mock-editorial"><img src="./photo/40.jpeg" alt="" class="El_3bd-img">
@@ -1080,6 +1076,8 @@
             </svg></div>
         </div>
       </a>
+      <!-- card---4 -->
+
       <a class="wcard" href="./sites/gallery-lazord.html" data-dir="left" data-delay="180">
         <div class="project-visual">
           <div class="project-mock mock-brand"><img src="./sites/photo-lazord/10.jpeg" class="lazord-img" alt="">
@@ -1103,6 +1101,8 @@
             </svg></div>
         </div>
       </a>
+      <!-- card---5 -->
+
       <a class="wcard" href="./sites/gallery-Creative-Icons.html" data-dir="up" data-delay="300">
         <div class="project-visual">
           <div class="project-mock mock-motion"><img src="./sites/photo-Creative-Icons/90.jpg" class="Creative-Icons-img"
@@ -1126,6 +1126,8 @@
             </svg></div>
         </div>
       </a>
+      <!-- card---6 -->
+
       <a class="wcard" href="./sites/gallery-Certificates-of-Appreciation.html" data-dir="right" data-delay="420">
         <div class="project-visual">
           <div class="project-mock mock-editorial"><img src="./sites/Certificates-of-Appreciation/120.jpg"
@@ -1149,7 +1151,9 @@
             </svg></div>
         </div>
       </a>
-      <a class="wcard" href="./sites/gallery-YLY.html" data-dir="left" data-delay="180">
+      <!-- card---7 -->
+
+      <a class="wcard wcard-down" href="./sites/gallery-YLY.html" data-dir="left" data-delay="180">
         <div class="project-visual">
           <div class="project-mock mock-brand"><img src="./sites/YLY/60.jpg" class="YLY-img" alt="">
             <div class="mock-brand-logo"></div>
@@ -1172,6 +1176,8 @@
             </svg></div>
         </div>
       </a>
+      <!-- card---8 -->
+
       <a class="wcard" href="./sites/gallery-Cosmetics.html" data-dir="up" data-delay="300">
         <div class="project-visual">
           <div class="project-mock mock-motion"><img src="./sites/Cosmetics/10.jpg" class="Cosmetics-img" alt="">
@@ -1194,7 +1200,8 @@
             </svg></div>
         </div>
       </a>
-      <a class="wcard" href="./sites/gallery-party.html" data-dir="right" data-delay="420">
+      <!-- card---9 -->
+      <a class="wcard wcard-down " href="./sites/gallery-party.html" data-dir="right" data-delay="420">
         <div class="project-visual">
           <div class="project-mock mock-editorial"><img src="./sites/photo-party/30.jpeg" class="party-img" alt="">
             <div class="mock-editorial-left" style="background:var(--indigo)"></div>
