@@ -457,7 +457,8 @@ function attachHoverBehavior(item) {
   function enterHover() {
     clearTimeout(timer);
     item.classList.add('hovered');
-    
+    document.body.classList.add('over-image');
+
     const fill = item.querySelector('.timer-fill');
     if (fill) {
       fill.style.transition = 'none';
@@ -467,26 +468,23 @@ function attachHoverBehavior(item) {
       fill.style.strokeDashoffset = '0';
     }
 
-    timer = setTimeout(() => { 
-  if (item.classList.contains('hovered')) {
-    const imgSrc = item.querySelector('img').src;
-    const imgTitle = item.querySelector('.g-title')?.textContent || '';
-    
-    openLightbox(imgSrc, imgTitle);
-    
-    const overlay = document.getElementById('lightbox-overlay');
-    if (overlay) {
-      overlay.classList.add('animate-zoom'); 
-    }
-    
-    leaveHover(); 
-  }
-}, DEEP_ZOOM_DELAY);
+    timer = setTimeout(() => {
+      if (item.classList.contains('hovered')) {
+        const imgSrc = item.querySelector('img')?.src;
+        const imgTitle = item.querySelector('.g-title')?.textContent || '';
+        const index = Array.from(grid.querySelectorAll('.g-item')).indexOf(item);
+        if (imgSrc) {
+          openLightbox(imgSrc, imgTitle, index);
+        }
+        leaveHover();
+      }
+    }, DEEP_ZOOM_DELAY);
   }
 
   function leaveHover() {
     clearTimeout(timer);
     item.classList.remove('hovered');
+    document.body.classList.remove('over-image');
     const fill = item.querySelector('.timer-fill');
     if (fill) {
       fill.style.transition = 'none';
@@ -592,6 +590,19 @@ function openLightbox(src, title, index) {
   updateNavigationButtons();
 }
 
+function closeLightbox() {
+  lightbox.classList.remove('active');
+  document.body.classList.remove('over-image');
+  document.getElementById('cursor').style.opacity = '1';
+  document.getElementById('cursor-ring').style.opacity = '1';
+  setTimeout(() => {
+    lightbox.style.display = 'none';
+    lightboxImg.src = '';
+    lightboxCaption.textContent = '';
+    currentImages = [];
+  }, 250);
+}
+
 function updateNavigationButtons() {
   lightboxPrev.style.display = currentIndex > 0 ? 'block' : 'none';
   lightboxNext.style.display = currentIndex < currentImages.length - 1 ? 'block' : 'none';
@@ -631,13 +642,22 @@ grid.addEventListener('click', e => {
 /* ══════════════════════════════════════════════════════════════
    FILTER
 ══════════════════════════════════════════════════════════════ */
+const FILTER_MAP = {
+  surreal: ['digital', 'abstract'],
+  concept: ['editorial'],
+  portrait: ['identity'],
+  env: ['motion'],
+  abstract: ['packaging']
+};
+
 document.querySelectorAll('.filter-pill').forEach(pill => {
   pill.addEventListener('click', () => {
     document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
     pill.classList.add('active');
     const f = pill.dataset.filter;
+    const accepted = FILTER_MAP[f];
     document.querySelectorAll('.g-item').forEach(item => {
-      item.style.display = (f === 'all' || item.dataset.cat === f) ? '' : 'none';
+      item.style.display = (f === 'all' || (accepted && accepted.includes(item.dataset.cat))) ? '' : 'none';
     });
   });
 });
